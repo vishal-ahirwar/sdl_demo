@@ -6,13 +6,13 @@
 #include <cstdlib>
 #include <ctime>
 
-constexpr int SCREEN_WIDTH = 800;
-constexpr int SCREEN_HEIGHT = 600;
+constexpr int SCREEN_WIDTH = 1024;
+constexpr int SCREEN_HEIGHT = 800;
 constexpr int PLAYER_SIZE = 50;
 constexpr int ENEMY_SIZE = 50;
 constexpr int SPEED = 5;
 constexpr int ENEMY_SPEED = 2;
-
+constexpr int NUM_OF_ENEMIES = 5;
 struct Entity
 {
     SDL_Rect rect;
@@ -40,7 +40,6 @@ void renderDeathCounter(SDL_Renderer *renderer, int deathCount)
 int main()
 {
     srand(time(0));
-
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         std::cerr << "SDL Initialization failed: " << SDL_GetError() << std::endl;
@@ -70,8 +69,8 @@ int main()
     std::vector<Entity> enemies;
     int deathCount = 0; // Player death counter
 
-    // Create 3 random enemies
-    for (int i = 0; i < 3; i++)
+    // Create NUM_OF_ENEMIES random enemies
+    for (int i = 0; i < NUM_OF_ENEMIES; i++)
     {
         Entity enemy = {
             {rand() % (SCREEN_WIDTH - ENEMY_SIZE), rand() % (SCREEN_HEIGHT - ENEMY_SIZE), ENEMY_SIZE, ENEMY_SIZE},
