@@ -8,9 +8,10 @@ if __name__=="__main__":
     if not conan_file_exist:
         print('Compilling SDL...')
         if not system(f"cd SDL && ninja -C build -j{cpu_count()}"):
+            system(f"cmake --install SDL/build --prefix SDL/install")
             exit(0)
         if not system(f"cd SDL && cmake -S . -B build  -G {GENERATOR} -DBUILD_SHARED_LIBS=OFF"):
-            system(f"cmake --install external/SDL/build --prefix external/SDL/install")
+            system(f"cmake --install SDL/build --prefix SDL/install")
 
     else:
         print("failed!")
